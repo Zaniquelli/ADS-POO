@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Exercicios - ADS-POO - 05/09/22</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="math.html" id="math">
+            Número 1: <input type="number" step="0.1" name="n1" value="2"/>
+            
+            <label for="operandos">Escolha um operador:</label>      
+            <select name="operandos" id="operandos" form="math">
+                <option value="soma">Soma</option>
+                <option value="sub">Subtração</option>
+                <option value="mult">Multiplicação</option>
+                <option value="divi">Divisão</option>
+            </select>
+            
+            Número 2: <input type="number" step="0.1" name="n2" value="2"/>
+            <input type="submit" value="Calcular"/>
+        </form>
+        
+        </br></br>
+        
+        <form action="random.html">
+            Insira o valor de número que deseja visualizar: <input type="number" min="1" max="100" name="n" value="1"/>
+            <input type="submit" value="Gerar Random"/>
+        </form>
+    </body>
+</html>
