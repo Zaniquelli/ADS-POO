@@ -18,11 +18,11 @@ public class ListServlet extends HttpServlet {
             throws ServletException, IOException {
         
         if (request.getParameter("add")!=null){
-            list.add(request.getParameter("add"));
+            list.add(request.getParameter("add")); // /list.json?add=texto
         }
         
         if (request.getParameter("remove")!=null){
-            list.remove(request.getParameter("remove"));
+            list.remove(request.getParameter("remove")); // /list.json?remove=texto
         }
         
         response.setContentType("application/json;charset=UTF-8");
