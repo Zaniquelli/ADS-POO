@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>ZaniTasks</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand m-2" href="#">ZaniTasks</a>
+        </nav>
+        <div id ="app" class="container-fluid m-1">
+            <h2>{{title}}</h2>
+
+            <div v-if="loading" class="spinner-border" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+
+            <div v-if="error" class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+
+            <div class="input-group mb-3">
+                <button v-on:click="addTask()" class="btn btn-outline-secondary" type="button">+</button>
+                <input v-model="newTask" type="text" class="form-control">
+            </div>
+
+            <table class="table">
+                <tr v-for="task of tasks">
+                    <th> <button v-on:click="removeTask(task)" type="button" class="btn btn-secondary">
+                            <i class="bi bi-check-circle"></i>
+                        </button>&nbsp;
+                        {{task}}
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+        
+        Victor Zaniquelli. RA: 1290482113005.
+        João Pedro Alexandre Vieira. RA: 1290481922001.
+        <script>
+const {createApp} = Vue;
+
+createApp({
+    data() {
+        return {
+            title: 'Tarefas',
+            loading: false,
+            error: null,
+            newTask: '',
+            tasks: null
+        };
+    },
+    
+    mounted(){
+        this.loadTasks();
+    },
+    
+    methods: {
+         loadTasks(params){
+            var url = "tasks.json";
+            if(params) url += '?' + params;
+            this.loading = true;
+            fetch(url).then((response) => response.json()).then((data) => this.tasks = data)
+            .catch((e) => this.error = e)
+            .finally(() => this.loading = false);
+        },
+        addTask(){
+            this.loadTasks("add="+this.newTask);
+            this.newTask = '';
+        },
+        removeTask(task) {
+            this.loadTasks("remove="+task);
+        }
+    }
+}).mount('#app')
+        </script>
+    </body>
+</html>
